@@ -1,14 +1,14 @@
-# Default values for meal-plan-app.
+# Default values for postgres-database.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: akashdro/meal-plan
+  repository: akashdro/postgres-3
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1"
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -36,28 +36,9 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-envar:
- - name: POSTGRES_USER
-   value: "test"
- - name: POSTGRES_PASSWORD
-   value: "test123"
- - name: POSTGRES_DB
-   value: "db"
-
-deployment1:
-  cm1: "/bin/sh"
-  cm2: "-c"
-  cm3: "rails server -b 0.0.0.0"   
-
-service1:
-  type: LoadBalancer
-  port: 3000
- 
-job:
-  cm1: "/bin/sh"
-  cm2: "-c"
-  cm3: "rails db:setup && rails db:migrate"
-  restartPolicy: Never
+service:
+  type: ClusterIP
+  port: 5432
 
 ingress:
   enabled: false
