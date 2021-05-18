@@ -14,8 +14,8 @@ spec:
            - name: {{ .name }}
              value: {{ .value }}
            {{- end }} 
-        command: ["/bin/sh","-c"]
-        args: ["rails db:setup && rails db:migrate"]
+        command: ["{{ .Values.job.cm1 }}","{{ .Values.job.cm2 }}"]
+        args: ["{{ .Values.job.cm3 }}"]
 #        - rails
 #        - db:setup
 #        - db:migrate

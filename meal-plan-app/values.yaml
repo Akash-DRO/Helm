@@ -43,13 +43,21 @@ envar:
  - name: POSTGRES_PASSWORD
    value: "test123"
  - name: POSTGRES_DB
-   value: "db"   
+   value: "db"
+
+deployment1:
+  cm1: "/bin/sh"
+  cm2: "-c"
+  cm3: "rails server -b 0.0.0.0"   
 
 service:
   type: LoadBalancer
   port: 3000
  
-job:  
+job:
+  cm1: "/bin/sh"
+  cm2: "-c"
+  cm3: "rails db:setup && rails db:migrate"
   restartPolicy: Never
 
 ingress:
